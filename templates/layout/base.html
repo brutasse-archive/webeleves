@@ -9,8 +9,15 @@
 	</head>
 	<body>
 		<div id="header">
-			<h1><a href="{% url home %}">Web<span class="logo">eleves</span></a></h1>
+			<h1><a href="{% url home %}">Web<span class="logo">eleves</span><span class="beta">Beta</span></a></h1>
 			<p class="sub">Le site des élèves de l'école des Mines de Saint-Étienne</p>
+		</div>
+		<div id="connect">
+			{% if user.is_authenticated %}
+			{{ user.get_full_name }} <b>»</b> <a href="{% url logout %}">Logout</a>
+			{% else %}
+			Visiteur <b>»</b> <a href="{% url login %}">Login</a>
+			{% endif %}
 		</div>
 		<div id="navbar">
 			<ul>
@@ -25,7 +32,10 @@
 			{% block content %}
 			{% endblock %}
 		</div>
+		<div id="sidebar">
+			{% include "layout/sidebar.html" %}
+		</div>
 		<div id="footer">
-			<p>Webeleve™</p>
+			<p>Webeleves™</p>
 	</body>
 </html>

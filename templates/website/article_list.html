@@ -1,0 +1,27 @@
+{% extends 'layout/base.html' %}
+{% load markup webeleves_tags %}
+
+{% block pagetitle %}
+Accueil |
+{% endblock %}
+
+{% block title %}
+» <span class="here">Actualités</span>
+{% endblock %}
+
+{% block content %}
+{% for article in object_list %}
+<div class="summary_{% cycle 'even' 'odd' %}">
+	<h2><a href="{% url article article.slug %}">{{ article.title }}</a></h2>
+	<p class="date">Posté par {{ article.author.get_full_name }} {{ article.creation_date|ago }}</p>
+	{{ article.content|textile|truncatewords:20 }}
+	<p class="right"><a href="{% url article article.slug %}">Lire la suite</a></p>
+</div>
+{% endfor %}
+{% if has_previous %}
+{{ previous }}
+{% endif %}
+{% if has_next %}
+{{ next }}
+{% endif %}
+{% endblock %}

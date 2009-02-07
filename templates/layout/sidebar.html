@@ -1,0 +1,8 @@
+{% if user.is_authenticated %}
+<div id="user">
+	<h3>{{ user.get_full_name }}</h3>
+	<ul>
+		<li><a class="addlink" href="{% url proposer_article %}">Proposer un article</a></li>
+	</ul>
+</div>
+{% endif %}

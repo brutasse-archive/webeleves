@@ -1,0 +1,18 @@
+{% extends 'layout/base.html' %}
+{% load markup webeleves_tags %}
+
+{% block pagetitle %}
+{{ object.title }} |
+{% endblock %}
+
+{% block title %}
+» Actualités » <span class="here">{{ object.title }}</span>
+{% endblock %}
+
+{% block content %}
+<div class="article">
+	<h2><a href="{% url article object.slug %}">{{ object.title }}</a></h2>
+	<p class="date">{{ object.creation_date|ago }}</p>
+	<p>{{ object.content|textile }}</p>
+</div>
+{% endblock %}

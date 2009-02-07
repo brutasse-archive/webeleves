@@ -1,0 +1,15 @@
+{% extends 'layout/base.html' %}
+
+{% block pagetitle %}
+Proposer un article |
+{% endblock %}
+
+{% block title %}
+» <span class="here">Proposer un article</span>
+{% endblock %}
+
+{% block content %}
+<table>
+	{{ form.as_table }}
+</table>
+{% endblock %}
