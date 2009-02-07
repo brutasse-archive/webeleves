@@ -1,0 +1,7 @@
+*.db
+*.pyc
+*.swp
+urls.py
+settings.py
+__init__.py
+manage.py
