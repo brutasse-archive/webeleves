@@ -23,10 +23,13 @@
 			<ul>
 				<li><a href="{% url home %}">Accueil</a></li>
 				<li><a href="{% url trombi %}">Trombi</a></li>
+				{% if user.is_staff %}
+				<li><a href="/admin/">Admin</a></li>
+				{% endif %}
 			</ul>
 		</div>
 		<div id="title"><span>
-				Accueil {% block title %}{% endblock %}</span>
+				<a href="{% url home %}">Accueil</a> {% block title %}{% endblock %}</span>
 		</div>
 		<div id="content">
 			{% block content %}

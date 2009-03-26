@@ -13,7 +13,7 @@ Accueil |
 {% for article in object_list %}
 <div class="summary_{% cycle 'even' 'odd' %}">
 	<h2><a href="{% url article article.slug %}">{{ article.title }}</a></h2>
-	<p class="date">Posté par {{ article.author.get_full_name }} {{ article.creation_date|ago }}</p>
+	<p class="date">Posté par {{ article.author.get_full_name }} il y a {{ article.creation_date|timesince }}</p>
 	{{ article.content|textile|truncatewords:20 }}
 	<p class="right"><a href="{% url article article.slug %}">Lire la suite</a></p>
 </div>
