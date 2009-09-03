@@ -1,7 +1,6 @@
 *.db
 *.pyc
 *.swp
-urls.py
-settings.py
-__init__.py
-manage.py
+coverage_runner.py
+local_settings.py
+test_settings.py

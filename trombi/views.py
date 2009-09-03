@@ -1,6 +1,7 @@
-# Trombi views
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+# -*- coding: utf-8 -*-
+from django.contrib.auth.decorators import login_required
+from shortcuts import render
 
-def home(request):
-    return render_to_response('trombi/main.html', locals(), context_instance=RequestContext(request))
+@login_required
+def trombi(request):
+    return render(request, 'trombi/main.html', locals())
