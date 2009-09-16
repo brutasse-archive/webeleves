@@ -121,6 +121,15 @@ h1 a:hover { background-color: #fff; color: #000; }
 #title a { color: inherit; font-weight: inherit; background: inherit; }
 #title a:hover { text-decoration: underline; }
 
+#messages {
+	margin-top: 5px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	padding: 5px 1em;
+	color: #444;
+	background-color: #f6f6f6;
+}
+
 /* Page content */
 #content {
 	width: 65%;
@@ -134,6 +143,7 @@ h2 a { color: #b02b2c; }
 .summary_even h2 a { color: #d15600; }
 
 .date { color: #aaa; font-size: 0.9em; margin-left: 0.6em; }
+.addlink { padding-left:12px; background:url(/static/icon_addlink.gif) 0 .2em no-repeat; }
 
 .notice {
 	font-weight: bold;
@@ -152,6 +162,32 @@ h2 a { color: #b02b2c; }
 .margin { margin: 0.3em; }
 
 #content p { margin: 0.6em 0 0 0; line-height: 1.5; text-align: justify; }
+.action {
+	width: 250px;
+	margin: 5px 0;
+}
+.action a {
+	display: block;
+	padding: 1em 30px;
+	border: 1px solid #ddd;
+}
+
+/* User profile */
+.picture img {
+	background-color: #fff;
+	padding: 5px;
+	border: 1px solid #ddd;
+}
+.bio { border: 1px solid #ddd; font-size: 1.2em; color: #555; padding: 0 5px; }
+.address { padding-left:18px; background:url('../icons/house.png') 0 0 no-repeat; }
+.mobile { padding-left:18px; background:url('../icons/phone.png') 0 0 no-repeat; }
+.phone { padding-left:18px; background:url('../icons/phone.jpg') 0 0 no-repeat; }
+.email { padding-left:18px; background:url('../icons/email.png') 0 0 no-repeat; }
+.website { padding-left:18px; background:url('../icons/world.png') 0 0 no-repeat; }
+.linkedin { padding-left:18px; background:url('../icons/linkedin.png') 0 0 no-repeat; }
+.facebook { padding-left:18px; background:url('../icons/facebook.png') 0 0 no-repeat; }
+.twitter { padding-left:18px; background:url('../icons/twitter.png') 0 0 no-repeat; }
+.openid { padding-left:18px; background:url('../icons/openid.png') 0 0 no-repeat; }
 
 /* Sidebar */
 #sidebar {
@@ -184,7 +220,6 @@ h2 a { color: #b02b2c; }
 	color: #fff;
 }
 
-.addlink { padding-left:12px; background:url(/static/icon_addlink.gif) 0 .2em no-repeat; }
 
 /* Footer (!) */
 #footer {

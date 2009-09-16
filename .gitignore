@@ -4,3 +4,6 @@
 coverage_runner.py
 local_settings.py
 test_settings.py
+initial_data.json
+media/pictures/promo*
+media/pictures/custom

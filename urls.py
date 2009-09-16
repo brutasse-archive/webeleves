@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     (r'^admin/doc/', include('django.contrib.admindocs.urls')),
     # Admin
     (r'^admin/', include(admin.site.urls)),
+    (r'^jsi18n', 'django.views.i18n.javascript_catalog'),
 
     (r'^trombi/', include('trombi.urls', namespace='trombi')),
     (r'^photos/', include('photos.urls', namespace='photos')),

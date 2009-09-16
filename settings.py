@@ -95,6 +95,7 @@ INSTALLED_APPS = (
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/logout/'
+AUTH_PROFILE_MODULE = 'trombi.UserProfile'
 
 try:
     from local_settings import *

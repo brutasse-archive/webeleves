@@ -1,0 +1,21 @@
+{% extends 'trombi/main.html' %}
+
+{% block pagetitle %}Edit Profile | {% endblock %}
+{% block title %}» <a href="{% url trombi:trombi %}">Trombi</a> » <a href="{% url trombi:profile %}">Your profile</a> » <span class="here">Edit</span>{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="/jsi18n/"></script>
+<script type="text/javascript" src="/media/admin/js/core.js"></script>
+{{ form.media }}
+{% endblock %} 
+
+{% block content %}
+<h2>Edit your profile</h2>
+<form method="post" action="{% url trombi:edit_profile %}">
+	<table>
+		{{ form.as_table }}
+	</table>
+	<input type="submit" value="Save"> | <a href="{% url trombi:profile %}">Cancel</a>
+</form>
+
+{% endblock %} 

@@ -7,3 +7,19 @@ Trombinoscope |
 {% block title %}
 » <span class="here">Trombi</span>
 {% endblock %}
+
+{% block content %}
+
+<h2>Trombinoscope</h2>
+
+<div class="action">
+	<a href="{% url trombi:browse %}">Parcourir</a>
+</div>
+<div class="action">
+	<a href="{% url trombi:search %}">Rechercher</a>
+</div>
+<div class="action">
+	<a href="{% url trombi:profile %}">Mon profil</a>
+</div>
+
+{% endblock %} 

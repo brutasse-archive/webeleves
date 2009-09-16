@@ -1,0 +1,87 @@
+{% extends 'trombi/main.html' %}
+{% load thumbnail %}
+
+{% block pagetitle %}{% ifequal user profile.user %}Your profile{% else %}{{ profile.user.get_full_name }}{% endifequal %} | {% endblock %}
+
+{% block title %}» <a href="{% url trombi:trombi %}">Trombi</a> » <span class="here">{% ifequal user profile.user %}Your profile{% else %}{{ profile.user.get_full_name }}{% endifequal %}</span>{% endblock %} 
+
+{% block content %}
+<h2>{{ profile.user.get_full_name }}</h2>
+<div class="row">
+	<div class="picture column grid_2">
+		<img src="{% thumbnail profile.current_picture 60x120 %}" alt=""/>
+	</div>
+	{% if profile.surname %}<div class="column grid_10">{{ profile.surname }}</div>{% endif %}
+	<div class="column grid_10">Promo {{ profile.promo }}</div>
+	{% if profile.bio %}<div class="bio column grid_8">{{ profile.bio }}</div>{% endif %}
+</div>
+{% if profile.address %}
+<div class="row">
+	<div class="column grid_2"><span class="address">Adresse</span></div>
+	<div class="column grid_8">{{ profile.address|linebreaksbr }}</div>
+	<div class="column push_2 grid_8">{{ profile.zip_code }} {{ profile.town }}</div>
+	<div class="column push_2 grid_8">{{ profile.country }}</div>
+</div>
+{% endif %}
+{% if profile.mobile_phone %}
+<div class="row">
+	<div class="column grid_2"><span class="mobile">Portable</span></div>
+	<div class="column grid_8">{{ profile.mobile_phone }}</div>
+</div>
+{% endif %}
+{% if profile.landline %}
+<div class="row">
+	<div class="column grid_2"><span class="phone">Fixe</span></div>
+	<div class="column grid_8">{{ profile.landline }}</div>
+</div>
+{% endif %}
+{% if profile.external_email %}
+<div class="row">
+	<div class="column grid_2"><span class="email">Email</span></div>
+	<div class="column grid_8"><a href="mailto:{{ profile.external_email }}">{{ profile.external_email }}</a></div>
+</div>
+{% endif %}
+<p><a href="{% url trombi:edit_profile %}">Edit your profile</a></p>
+<h2>Réseaux</h2>
+{% if profile.site %}
+<div class="row">
+	<div class="column grid_2"><span class="website">Site</span></div>
+	<div class="column grid_8"><a href="{{ profile.site }}">{{ profile.site }}</a></div>
+</div>
+{% endif %}
+
+{% if profile.linkedin %}
+<div class="row">
+	<div class="column grid_2"><span class="linkedin">Linkedin</span></div>
+	<div class="column grid_8"><a href="{{ profile.linkedin }}">{{ profile.linkedin }}</a></div>
+</div>
+{% endif %}
+
+{% if profile.facebook %}
+<div class="row">
+	<div class="column grid_2"><span class="facebook">Facebook</span></div>
+	<div class="column grid_8"><a href="{{ profile.facebook }}">{{ profile.facebook }}</a></div>
+</div>
+{% endif %}
+
+{% if profile.twitter %}
+<div class="row">
+	<div class="column grid_2"><span class="twitter">Twitter</span></div>
+	<div class="column grid_8"><a href="{{ profile.twitter }}">{{ profile.twitter }}</a></div>
+</div>
+{% endif %}
+
+{% if profile.openid %}
+<div class="row">
+	<div class="column grid_2"><span class="openid">OpenID</span></div>
+	<div class="column grid_8"><a href="{{ profile.openid }}">{{ profile.openid }}</a></div>
+</div>
+{% endif %}
+
+<p><a href="{% url trombi:edit_profile_networks %}">Edit your networks</a></p>
+
+<h2>École</h2>
+
+<p><a href="{% url trombi:edit_profile_school %}">Edit your school info</a></p>
+
+{% endblock %} 

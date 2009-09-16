@@ -4,8 +4,10 @@
 	<head>
 		<title>{% block pagetitle %}{% endblock %}Webeleves, Le site des élèves de l'école des Mines de Saint-Étienne</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}style.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/style.css" media="screen"/>
+		<link rel="stylesheet" type="text/css" href="{{ MEDIA_URL }}css/grid.css" media="screen"/>
 		<link rel="shortcut icon" href="{{ MEDIA_URL}}favicon.png" />
+		{% block extrahead %}{% endblock %} 
 	</head>
 	<body>
 		<div id="header">
@@ -22,7 +24,7 @@
 		<div id="navbar">
 			<ul>
 				<li><a href="{% url home %}">Accueil</a></li>
-				<li><a href="{% url trombi %}">Trombi</a></li>
+				<li><a href="{% url trombi:trombi %}">Trombi</a></li>
 				{% if user.is_staff %}
 				<li><a href="/admin/">Admin</a></li>
 				{% endif %}
@@ -31,6 +33,13 @@
 		<div id="title"><span>
 				<a href="{% url home %}">Accueil</a> {% block title %}{% endblock %}</span>
 		</div>
+		{% if messages %}
+		<div id="messages">
+			{% for m in messages %}
+			<p>{{ m }}</p>
+			{% endfor %}
+		</div>
+		{% endif %}
 		<div id="content">
 			{% block content %}
 			{% endblock %}
@@ -40,5 +49,6 @@
 		</div>
 		<div id="footer">
 			<p>Webeleves™</p>
+		</div>
 	</body>
 </html>
