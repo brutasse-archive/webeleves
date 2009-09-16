@@ -97,6 +97,13 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/logout/'
 AUTH_PROFILE_MODULE = 'trombi.UserProfile'
 
+# LDAP settings
+LDAP_SERVER = 'ldap://localhost'
+LDAP_DOMAIN = 'localhost'
+
+# Default backend to LDAP backend
+AUTHENTICATION_BACKENDS = ('webeleves.auth.LDAPBackend',)
+
 try:
     from local_settings import *
 except ImportError:

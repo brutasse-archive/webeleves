@@ -105,7 +105,8 @@ class UserProfile(models.Model):
 
 def create_profile(sender, instance, created, **kwargs):
     if created:
-        profile = UserProfile(user=instance, promo=datetime.now().year)
+        profile = UserProfile.objects.create(user=instance,
+                promo=datetime.now().year)
         profile.default_picture = 'pictures/promo%s/%s.jpg' % (profile.promo,
                 profile.user.username)
         profile.save()
