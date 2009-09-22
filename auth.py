@@ -16,10 +16,10 @@ class LDAPBackend(object):
         if password is None or password == '':
             return False
 
-        binddn = '%s@%s' % (username, settings.LDAP_DOMAIN) # emse.fr / messel.emse.fr
         try:
             l = ldap.initialize(settings.LDAP_SERVER) # ldap://localhost
-            l.simple_bind_s(binddn, password)
+            dn = 'uid=%s,ou=Users,ou=eleves,dc=emse,dc=fr' % username
+            l.simple_bind_s(dn, password)
             l.unbind_s()
             return True
         except ldap.LDAPError:

@@ -98,7 +98,6 @@ AUTH_PROFILE_MODULE = 'trombi.UserProfile'
 
 # LDAP settings
 LDAP_SERVER = 'ldap://localhost'
-LDAP_DOMAIN = 'localdomain'
 LDAP_DATA = '' # Directory containing files with the output of ldapsearch
 
 # French date format
