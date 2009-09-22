@@ -90,7 +90,7 @@ class LDAPUser(object):
 class LDAPParser(object):
     """Parses a file containing the raw output of an ldapsearch command"""
     def __init__(self, file_name):
-        self.file_name = file_name
+        self.file_name = os.path.join(settings.LDAP_DATA, file_name)
         self.users = []
 
     def read_file(self):
