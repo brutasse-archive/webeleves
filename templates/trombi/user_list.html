@@ -1,0 +1,39 @@
+{% extends 'trombi/main.html' %}
+{% load thumbnail %}
+
+{% block pagetitle %}{% if promo %}Promo {{ promo }}{% else %}Recherche{% endif %} | {% endblock %}
+
+{% block title %}» <a href="{% url trombi:trombi %}">Trombi</a> » <span class="here">{% if promo %}Promo {{ promo }}{% else %}Recherche{% endif %}</span>{% endblock %} 
+
+{% block content %}
+<h2>{% if promo %}Promo {{ promo }}{% else %}Recherche{% endif %}</h2>
+
+<p>{{ object_list.count }} personne{{ object_list.count|pluralize }}</p>
+
+<div class="row">
+{% for profile in object_list %}
+	<div class="column grid_4">
+		<div class="row">
+			<div class="column grid_1">
+				{% if profile.has_picture %}
+				<img src="{% thumbnail profile.current_picture 60x80 %}" alt=""/>
+				{% else %}
+				<img src="{{ MEDIA_URL }}pictures/anon60x80.jpg" />
+				{% endif %}
+			</div>
+			<div class="column grid_3">
+				<a href="{% url trombi:eleve profile.promo,profile.user.username %}">{{ profile.user.get_full_name }}</a>
+				{% if profile.surname %}<br/>Alias {{ profile.surname }}{% endif %}
+				{% if profile.me %}<br/>
+					{% if profile.room %}{{ profile.room }} - {% endif %}
+					{{ profile.corridor }}
+					{% else %}
+					{% if profile.corridor %}<br/>{{ profile.corridor }}{% endif %}
+				{% endif %}
+				<br/><a class="mail" href="mailto:{{ profile.user.email }}">{{ profile.user.username }}@</a> ({{ profile.promo }})
+			</div>
+		</div>
+	</div>
+{% endfor %}
+</div>
+{% endblock %} 

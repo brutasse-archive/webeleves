@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from datetime import datetime
+import os
 
 class UserProfile(models.Model):
     # Mandatory fields
@@ -12,46 +13,82 @@ class UserProfile(models.Model):
     promo = models.PositiveIntegerField(_('Promotion'))
 
     # Not required fields
-    bio = models.CharField(_('Bio'), max_length=255, null=True, blank=True)
-    surname = models.CharField(_('Surname'), max_length=255, null=True,
+    bio = models.CharField(_('Titre'), max_length=255, null=True, blank=True,
+            help_text='Le titre que vous voulez donner à votre profil')
+    surname = models.CharField(_('Surnom'), max_length=255, null=True,
             blank=True)
-    date_of_birth = models.DateField(_('Date of birth'), null=True, blank=True)
-    address = models.TextField(_('Address'), null=True, blank=True)
-    zip_code = models.CharField(_('Zip code'), max_length=50, null=True,
+    date_of_birth = models.DateField(_('Date de naissance'), null=True,
+            blank=True, help_text='Format: JJ/MM/AAAA')
+    address = models.TextField(_('Adresse'), null=True, blank=True)
+    zip_code = models.CharField(_('Code postal'), max_length=50, null=True,
             blank=True)
-    town = models.CharField(_('Town'), max_length=255, null=True, blank=True)
-    country = models.CharField(_('Country'), max_length=255, null=True,
+    town = models.CharField(_('Ville'), max_length=255, null=True, blank=True)
+    country = models.CharField(_('Pays'), max_length=255, null=True,
+            blank=True, default='France')
+    mobile_phone = models.CharField(_('Portable'), max_length=50, null=True,
             blank=True)
-    mobile_phone = models.CharField(_('Mobile phone'), max_length=50, null=True,
+    landline = models.CharField(_('Fixe'), max_length=50, null=True,
             blank=True)
-    landline = models.CharField(_('Landline'), max_length=50, null=True,
+    external_email = models.EmailField(_('Email (non ecole)'), null=True,
             blank=True)
-    external_email = models.EmailField(_('External email'), null=True,
-            blank=True)
-    ast = models.BooleanField(_('Admitted under'), default=False)
+    ast = models.BooleanField(_('AST'), default=False)
     default_picture = models.ImageField(_('Default picture'), upload_to='junk',
             null=True, blank=True)
-    picture = models.ImageField(_('Picture'), upload_to='pictures/custom',
+    picture = models.ImageField(_('Photo'), upload_to='pictures/custom',
             null=True, blank=True)
-    valid_picture = models.BooleanField(_('Valid picture'), default=False)
+    valid_picture = models.BooleanField(_('Photo valide'), default=False)
 
     CORRIDOR = (
+            ('0D', '0D'),
             ('1A', '1A'),
+            ('1B', '1B'),
+            ('1C', '1C'),
+            ('1D', '1D'),
+            ('2A', '2A'),
+            ('2B', '2B'),
+            ('2C', '2C'),
+            ('2D', '2D'),
+            ('3A', '3A'),
+            ('3B', '3B'),
+            ('3C', '3C'),
+            ('3D', '3D'),
+            ('4A', '4A'),
+            ('4B', '4B'),
+            ('4C', '4C'),
+            ('4D', '4D'),
+            ('5A', '5A'),
+            ('5B', '5B'),
+            ('5C', '5C'),
+            ('5D', '5D'),
+            ('Cyborg', 'Cyborg'),
+            ('1NME', '1NME'),
+            ('2NME', '2NME'),
+            ('3NME', '3NME'),
+            ('4NME', '4NME'),
+            ('5NME', '5NME'),
+            ('6NME', '6NME'),
+            ('7NME', '7NME'),
+            ('Hors ME', 'Hors ME'),
     )
-    room = models.CharField(_('Room'), max_length=50, null=True)
-    corridor = models.CharField(_('Corridor'), choices=CORRIDOR,
+    room = models.CharField(_('Chambre'), max_length=50, null=True, blank=True)
+    corridor = models.CharField(_('Couloir'), choices=CORRIDOR,
             max_length=50, null=True)
 
+    def me(self):
+        return self.corridor != 'Hors ME' and self.corridor is not None
+
     # Network
-    site = models.URLField(_('Blog/Website'), verify_exists=False, null=True)
+    site = models.URLField(_('Blog/Website'), verify_exists=False, null=True,
+            blank=True)
     linkedin = models.URLField(_('Linkedin profile'), verify_exists=False,
-            null=True)
+            null=True, blank=True)
     facebook = models.URLField(_('Facebook profile'), verify_exists=False,
-            null=True)
+            null=True, blank=True)
     twitter = models.URLField(_('Twitter profile'), verify_exists=False,
-            null=True)
-    openid = models.URLField(_('OpenID URL'), verify_exists=False, null=True)
-    msn = models.EmailField(_('MSN'), null=True)
+            null=True, blank=True)
+    openid = models.URLField(_('URL OpenID'), verify_exists=False, null=True,
+            blank=True)
+    msn = models.EmailField(_('MSN'), null=True, blank=True)
 
     AXE_1 = (
             ('ISI', 'ISI'),
@@ -99,6 +136,10 @@ class UserProfile(models.Model):
         else:
             return self.default_picture
 
+    def has_picture(self):
+        if self.current_picture:
+            return os.path.exists(self.current_picture.path)
+
 
 # Signal handler
 # Creates a profile if a user has just been created
@@ -107,8 +148,6 @@ def create_profile(sender, instance, created, **kwargs):
     if created:
         profile = UserProfile.objects.create(user=instance,
                 promo=datetime.now().year)
-        profile.default_picture = 'pictures/promo%s/%s.jpg' % (profile.promo,
-                profile.user.username)
         profile.save()
 
 models.signals.post_save.connect(create_profile, User)

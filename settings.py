@@ -6,7 +6,6 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
     (u'Bruno Renié', 'bruno.renie@mines-saint-etienne.org'),
 )
 
@@ -85,7 +84,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     'django.contrib.markup',
     'sorl.thumbnail',
-    # Real apps
+    # 'Real' apps
     'website',
     'trombi',
     'photos',
@@ -93,16 +92,26 @@ INSTALLED_APPS = (
 )
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/' # if not {{ next }}
 LOGOUT_URL = '/logout/'
 AUTH_PROFILE_MODULE = 'trombi.UserProfile'
 
 # LDAP settings
 LDAP_SERVER = 'ldap://localhost'
-LDAP_DOMAIN = 'localhost'
+LDAP_DOMAIN = 'localdomain'
+LDAP_DATA = '' # Directory containing files with the output of ldapsearch
 
-# Default backend to LDAP backend
-AUTHENTICATION_BACKENDS = ('webeleves.auth.LDAPBackend',)
+# French date format
+DATE_FORMAT = 'd/m/Y'
+
+THUMBNAIL_QUALITY = 100
+
+AUTHENTICATION_BACKENDS = (
+        # Default backend to LDAP backend
+        'webeleves.auth.LDAPBackend',
+        # Fallback to ModelBackend if needed
+        'django.contrib.auth.backends.ModelBackend',
+)
 
 try:
     from local_settings import *

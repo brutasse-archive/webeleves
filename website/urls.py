@@ -1,22 +1,15 @@
 # -*- coding: UTF-8 -*-
-# URLs for webeleves.website
 from django.conf.urls.defaults import *
-from django.contrib.auth.views import login, logout
-from website.views import suggest
-from website.models import Article
 
-info_dict = {
-        'queryset': Article.objects.published(),
-        'paginate_by': 5,
-}
-detail_dict = { 'queryset': Article.objects.published(), }
-
-urlpatterns = patterns('',
+urlpatterns = patterns('django.contrib.auth.views',
     # Login / logout
-    url(r'^login/$', login, name='login'),
-    url(r'^logout/$', logout, name='logout'),
+    url(r'^login/$', 'login', name='login'),
+    url(r'^logout/$', 'logout', name='logout'),
+)
+
+urlpatterns += patterns('website.views',
     # Le site principal
-    url(r'^$', 'django.views.generic.list_detail.object_list', info_dict, name='home'),
-    url(r'^articles/proposer/$', suggest, name='proposer_article'),
-    url(r'^articles/(?P<slug>[-\w]+)/$', 'django.views.generic.list_detail.object_detail', detail_dict, name='article'),
+    url(r'^$', 'home', name='home'),
+    url(r'^articles/proposer/$', 'suggest', name='proposer_article'),
+    url(r'^articles/(?P<slug>[-\w]+)/$', 'article', name='article'),
 )

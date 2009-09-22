@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.models import User, Group
 from django.core.management.base import BaseCommand
+from django.conf import settings
 
 import os
 import re
@@ -31,7 +32,7 @@ class LDAPUser(object):
     def __init__(self, login, name, surname, email, promo):
         """A bit of cleanup on the parameters"""
         self.login = login
-        self.name = name.replace('_', ' ')
+        self.name = name.replace('_', ' ').replace('-', ' ')
         self.surname = surname
         self.email = email
         self.promo = promo.replace('ICM_', '')
@@ -67,6 +68,8 @@ class LDAPUser(object):
             # A signal created the profile
             profile = user.get_profile()
             profile.promo = self.guess_promo()
+            profile.default_picture = 'pictures/promo%s/%s.jpeg' % \
+                    (profile.promo, profile.user.username)
             profile.save()
 
         # Cleaning the groups... A user is only part of 1 promo
@@ -116,9 +119,7 @@ class LDAPParser(object):
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        files = ('dap/1a.txt', 'dap/2a.txt', 'dap/3a.txt',
-                 'dap/2005.txt', 'dap/2006.txt')
-        for file in files:
+        for file in os.listdir(settings.LDAP_DATA):
             parser = LDAPParser(file)
             parser.read_file()
             counter = 0

@@ -7,8 +7,7 @@ html {
 
 body {
 	padding: 1em;
-	width: 90%;
-	max-width: 800px;
+	width: 860px;
 	margin: 1em auto;
 	background-color: #fff;
 	border: 1px solid #22c;
@@ -16,6 +15,12 @@ body {
 	-webkit-border-radius: 10px;
 	font-size: 0.95em;
 	font-family: Georgia, Arial, sans-serif;
+}
+
+/* help text */
+form td {
+	font-size: 0.8em;
+	color: #aaa;
 }
 
 ul, li, p, h2 {
@@ -180,6 +185,7 @@ h2 a { color: #b02b2c; }
 }
 .bio { border: 1px solid #ddd; font-size: 1.2em; color: #555; padding: 0 5px; }
 .address { padding-left:18px; background:url('../icons/house.png') 0 0 no-repeat; }
+.calendar { padding-left:18px; max-width: 110px; background:url('../icons/calendar_day.png') 0 0 no-repeat; }
 .mobile { padding-left:18px; background:url('../icons/phone.png') 0 0 no-repeat; }
 .phone { padding-left:18px; background:url('../icons/phone.jpg') 0 0 no-repeat; }
 .email { padding-left:18px; background:url('../icons/email.png') 0 0 no-repeat; }
@@ -188,6 +194,13 @@ h2 a { color: #b02b2c; }
 .facebook { padding-left:18px; background:url('../icons/facebook.png') 0 0 no-repeat; }
 .twitter { padding-left:18px; background:url('../icons/twitter.png') 0 0 no-repeat; }
 .openid { padding-left:18px; background:url('../icons/openid.png') 0 0 no-repeat; }
+.msn { padding-left:18px; background:url('../icons/msn.png') 0 0 no-repeat; }
+
+a.mail { color: #63a1fa; }
+a.mail:hover { color: #4381da; background-color: inherit; }
+
+/* Search form */
+form#searchform input { float: left; }
 
 /* Sidebar */
 #sidebar {
@@ -221,7 +234,7 @@ h2 a { color: #b02b2c; }
 }
 
 
-/* Footer (!) */
+/* Footer */
 #footer {
 	border-top: 2px dashed #eeeeee;
 	margin-top: 1.5em;

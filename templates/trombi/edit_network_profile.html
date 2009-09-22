@@ -1,15 +1,15 @@
 {% extends 'trombi/main.html' %}
 
-{% block pagetitle %}Edit your networks | {% endblock %}
-{% block title %}» <a href="{% url trombi:trombi %}">Trombi</a> » <a href="{% url trombi:profile %}">Your profile</a> » <span class="here">Networks</span>{% endblock %}
+{% block pagetitle %}Modifier mes réseaux | {% endblock %}
+{% block title %}» <a href="{% url trombi:trombi %}">Trombi</a> » <a href="{% url trombi:profile %}">Mon profil</a> » <span class="here">Réseaux</span>{% endblock %}
 
 {% block content %}
-<h2>Edit your networks</h2>
+<h2>Modifier mes réseaux</h2>
 <form method="post" action="{% url trombi:edit_profile_networks %}">
 	<table>
 		{{ form.as_table }}
 	</table>
-	<input type="submit" value="Save"> | <a href="{% url trombi:profile %}">Cancel</a>
+	<input type="submit" value="Enregistrer"> | <a href="{% url trombi:profile %}">Annuler</a>
 </form>
 
 {% endblock %} 

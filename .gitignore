@@ -5,3 +5,4 @@ local_settings.py
 initial_data.json
 media/pictures/promo*
 media/pictures/custom
+dap
