@@ -78,13 +78,13 @@ class UserProfile(models.Model):
         return self.corridor != 'Hors ME' and self.corridor is not None
 
     # Network
-    site = models.URLField(_('Blog/Website'), verify_exists=False, null=True,
+    site = models.URLField(_('Blog/Site'), verify_exists=False, null=True,
             blank=True)
-    linkedin = models.URLField(_('Linkedin profile'), verify_exists=False,
+    linkedin = models.URLField(_('Profil Linkedin'), verify_exists=False,
             null=True, blank=True)
-    facebook = models.URLField(_('Facebook profile'), verify_exists=False,
+    facebook = models.URLField(_('Profil Facebook'), verify_exists=False,
             null=True, blank=True)
-    twitter = models.URLField(_('Twitter profile'), verify_exists=False,
+    twitter = models.URLField(_('Twitter'), verify_exists=False,
             null=True, blank=True)
     openid = models.URLField(_('URL OpenID'), verify_exists=False, null=True,
             blank=True)
