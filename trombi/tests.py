@@ -128,7 +128,7 @@ class TrombiTest(TestCase):
         url = reverse('trombi:search')
         # There is a default value in the box. The users should not submit
         # this value
-        data = {'q': u'Nom, prénom, login'}
+        data = {'q': u'Nom, prénom, login, surnom'}
         response = self.client.get(url, data)
         self.assertEquals(response.status_code, 302)
 

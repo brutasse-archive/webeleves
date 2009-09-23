@@ -16,7 +16,8 @@
 		</div>
 		<div id="connect">
 			{% if user.is_authenticated %}
-			{{ user.get_full_name }} <b>»</b> <a href="{% url logout %}">Logout</a>
+			{% if user.get_profile.surname %}{{ user.get_profile.surname }}{% else %}
+			{{ user.get_full_name }}{% endif %} <b>»</b> <a href="{% url logout %}">Logout</a>
 			{% else %}
 			Visiteur <b>»</b> <a href="{% url login %}">Login</a>
 			{% endif %}

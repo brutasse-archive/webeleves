@@ -93,7 +93,7 @@ def edit_profile_school(request):
 def search(request):
     """Make a search with some criteria"""
     query = request.GET.get('q')
-    if query == u'Nom, prénom, login': # the u'' is important!
+    if query == u'Nom, prénom, login, surnom': # the u'' is important!
         return redirect(reverse('trombi:trombi'))
     words = query.split(' ')
 
@@ -102,11 +102,12 @@ def search(request):
     for word in words:
         this_qs = Q(user__username__iexact=word) | \
                 Q(user__first_name__iexact=word) | \
-                Q(user__last_name__iexact=word)
+                Q(user__last_name__iexact=word) | \
+                Q(surname__iexact=word)
         if qs is None:
             qs = this_qs
         else:
-            qs = qs | this_qs
+            qs = qs & this_qs
 
     matches = UserProfile.objects.filter(qs)
     return object_list(request, matches, template_name='trombi/user_list.html')

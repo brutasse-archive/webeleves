@@ -68,7 +68,7 @@ class LDAPUser(object):
             # A signal created the profile
             profile = user.get_profile()
             profile.promo = self.guess_promo()
-            profile.default_picture = 'pictures/promo%s/%s.jpeg' % \
+            profile.default_picture = 'pictures/promo%s/%s.jpg' % \
                     (profile.promo, profile.user.username)
             profile.save()
 

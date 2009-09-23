@@ -16,7 +16,7 @@ class UserProfile(models.Model):
     bio = models.CharField(_('Titre'), max_length=255, null=True, blank=True,
             help_text='Le titre que vous voulez donner à votre profil')
     surname = models.CharField(_('Surnom'), max_length=255, null=True,
-            blank=True)
+            blank=True, help_text='Le nom qui apparait sur tes commentaires/news')
     date_of_birth = models.DateField(_('Date de naissance'), null=True,
             blank=True, help_text='Format: JJ/MM/AAAA')
     address = models.TextField(_('Adresse'), null=True, blank=True)
