@@ -19,7 +19,7 @@ class LDAPBackend(object):
         try:
             l = ldap.initialize(settings.LDAP_SERVER) # ldap://localhost
             dn = 'uid=%s,ou=Users,ou=eleves,dc=emse,dc=fr' % username
-            l.simple_bind_s(dn, password)
+            l.simple_bind_s(dn, password.encode('utf-8'))
             l.unbind_s()
             return True
         except ldap.LDAPError:
