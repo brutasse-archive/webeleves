@@ -86,6 +86,8 @@ class LDAPUser(object):
             for g in user.groups.all():
                 user.groups.remove(g)
 
+        return created
+
 
 class LDAPParser(object):
     """Parses a file containing the raw output of an ldapsearch command"""
@@ -96,6 +98,7 @@ class LDAPParser(object):
     def read_file(self):
         """Parses the file and fills the self.users list"""
         file = open(self.file_name, 'r')
+        login = None
         for line in file:
             attrs = None
             if not line.startswith('#'):
@@ -113,6 +116,9 @@ class LDAPParser(object):
                         login = value
                     if FIELDS_ASSOC[key] == 'promo':
                         promo = value
+
+                else:
+                    if key == 'dn' and login is not None:
                         user = LDAPUser(login, name, surname, email, promo)
                         self.users.append(user)
         file.close()
