@@ -10,7 +10,10 @@ class LDAPBackend(object):
         if not self.is_valid(username, password):
             return None
 
-        return User.objects.get(username=username)
+        try:
+            return User.objects.get(username=username)
+        except User.DoesNotExist:
+            return None
 
     def is_valid(self, username, password):
         if password is None or password == '':

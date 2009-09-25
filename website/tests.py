@@ -45,3 +45,10 @@ class WebsiteTest(TestCase):
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)
         self.assertTrue('This is a test article' in response.content)
+
+    def test_login_failure(self):
+        url = reverse('login')
+        data = {'username': 'test', 'password': 'test'}
+        response = self.client.post(url, data)
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('errorlist' in response.content)
