@@ -4,6 +4,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.list_detail import object_list, object_detail
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 from django.db.models import Q
 
 from shortcuts import render
@@ -46,6 +47,7 @@ def vcard(request, promo, login):
     """Downlaod a vCard"""
     user = User.objects.get(username=login)
     profile = user.get_profile()
+    site = Site.objects.get_current()
     if not '%s' % profile.promo == '%s' % promo:
         return redirect(reverse('trombi:vcard', args=[profile.promo, login]))
     response = render(request, 'trombi/vcard.vcf', locals(),
