@@ -1,0 +1,11 @@
+{% load thumbnail %}BEGIN:VCARD
+VERSION:3.0
+N:{{ profile.user.last_name }};{{ profile.user.first_name }}
+FN:{{ profile.user.get_full_name }}
+ORG:École des Mines de Saint-Étienne
+TITLE:{{ profile.user.get_full_name }}
+EMAIL:{{ profile.user.email }}{% if profile.mobile_phone %}
+TEL;TYPE=VOICE:{{ profile.mobile_phone }}{% endif %}{% if profile.address %}
+ADR;TYPE=HOME:;;{{ profile.address }};{{ profile.town }};;{{ profile.zip_code }};{{ profile.country }}{% endif %}
+PHOTO;VALUE=uri:http://{{ site }}{% thumbnail user.get_profile.current_picture 120x160 %}
+END:VCARD

@@ -42,6 +42,18 @@ def eleve(request, promo, login):
             extra_context=extra_context)
 
 @login_required
+def vcard(request, promo, login):
+    """Downlaod a vCard"""
+    user = User.objects.get(username=login)
+    profile = user.get_profile()
+    if not '%s' % profile.promo == '%s' % promo:
+        return redirect(reverse('trombi:vcard', args=[profile.promo, login]))
+    response = render(request, 'trombi/vcard.vcf', locals(),
+            mimetype='text/x-vcard')
+    response['Content-Disposition'] = 'attachment; filename=%s.vcf' % user.username
+    return response
+
+@login_required
 def profile(request):
     profile = request.user.get_profile()
     return render(request, 'trombi/profile.html', locals())

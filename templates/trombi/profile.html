@@ -70,6 +70,10 @@
 			<div class="column grid_2"><span class="email">Email</span></div>
 			<div class="column grid_7"><a href="mailto:{{ profile.external_email }}">{{ profile.external_email }}</a></div>
 		</div>{% endif %}
+		<div class="row">
+			<div class="column grid_2"><span class="vcard">vCard</span></div>
+			<div class="column grid_7"><a href="{% url trombi:vcard profile.promo,profile.user.username %}">Télécharger la vCard</a></div>
+		</div>
 	</div>
 </div>
 

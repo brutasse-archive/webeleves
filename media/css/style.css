@@ -155,6 +155,7 @@ h2 a { color: #b02b2c; }
 
 .date { color: #aaa; font-size: 0.9em; margin-left: 0.6em; }
 .addlink { padding-left:12px; background:url(/static/icon_addlink.gif) 0 .2em no-repeat; }
+.vcard { padding-left:18px; background:url(../icons/vcard.png) 0 0 no-repeat; }
 
 .notice {
 	font-weight: bold;

@@ -123,6 +123,19 @@ class TrombiTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTrue('profil' in response.content)
 
+    def test_vcard(self):
+        """Downloading a vCard"""
+        # try with the wrong promo
+        url = reverse('trombi:vcard', args=[2004, 'testuser'])
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 302)
+
+        # Right one now
+        url = reverse('trombi:vcard', args=[2007, 'testuser'])
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response['content-type'], 'text/x-vcard')
+
     def test_search(self):
         """Searching for users"""
         url = reverse('trombi:search')

@@ -12,4 +12,5 @@ urlpatterns = patterns('trombi.views',
         name='edit_profile_school'),
     url(r'^promo(?P<promo>\d{4})/$', 'promo', name='promo'),
     url(r'^promo(?P<promo>\d{4})/(?P<login>[^/]+)/$', 'eleve', name='eleve'),
+    url(r'^promo(?P<promo>\d{4})/(?P<login>[^/]+)/vcard/$', 'vcard', name='vcard'),
 )
