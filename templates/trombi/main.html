@@ -1,5 +1,7 @@
 {% extends 'layout/base.html' %}
 
+{% block extrahead %}<link rel="search" type="application/opensearchdescription+xml" title="Trombi des élèves" href="{% url trombi:opensearch %}">{% endblock %}
+
 {% block pagetitle %}
 Trombinoscope |
 {% endblock %}

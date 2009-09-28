@@ -4,6 +4,7 @@ from django.conf.urls.defaults import *
 urlpatterns = patterns('trombi.views',
     url(r'^$', 'trombi', name='trombi'),
     url(r'^search/$', 'search', name='search'),
+    url(r'^opensearch/$', 'opensearch', name='opensearch'),
     url(r'^profile/$', 'profile', name='profile'),
     url(r'^profile/edit/$', 'edit_profile', name='edit_profile'),
     url(r'^profile/edit/networks/$', 'edit_profile_networks',

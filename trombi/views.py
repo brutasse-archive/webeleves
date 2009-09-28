@@ -55,6 +55,12 @@ def vcard(request, promo, login):
     response['Content-Disposition'] = 'attachment; filename=%s.vcf' % user.username
     return response
 
+def opensearch(request):
+    """OpenSearch XML file"""
+    site = Site.objects.get_current()
+    return render(request, 'trombi/opensearch.xml', locals(),
+            mimetype='text/xml')
+
 @login_required
 def profile(request):
     profile = request.user.get_profile()

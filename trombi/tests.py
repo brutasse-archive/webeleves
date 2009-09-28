@@ -161,3 +161,11 @@ class TrombiTest(TestCase):
         response = self.client.get(url, data)
         self.assertEquals(response.status_code, 200)
         self.assertTrue('0 personne' in response.content)
+
+    def test_opensearch(self):
+        """Testing the XML opensearch file generation"""
+        url = reverse('trombi:opensearch')
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 200)
+        self.assertEquals(response['Content-Type'], 'text/xml')
+        self.assertTrue('/search/?q={searchTerms}' in response.content)

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:ie="http://schemas.microsoft.com/Search/2008/">
+	<ShortName>Trombi des élèves</ShortName>
+	<Description>Rechercher un nom, prénom, login, surnom...</Description>
+	<Image height="16" width="16" type="image/ico">http://{{ site }}{{ MEDIA_URL }}favicon.ico</Image>
+	<Url type="text/html" method="GET" template="http://{{ site }}{% url trombi:search %}?q={searchTerms}"/>
+	<Language>fr</Language>
+	<ie:PreviewUrl type="text/html" method="GET" template="http://{{ site }}{% url trombi:search %}?q={searchTerms}"/>
+</OpenSearchDescription>
