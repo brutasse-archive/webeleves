@@ -32,7 +32,7 @@ def promo(request, promo):
 @login_required
 def eleve(request, promo, login):
     """Public profile of this guy"""
-    user = User.objects.get(username=login)
+    user = get_object_or_404(User, username=login)
     profile = user.get_profile()
     if not '%s' % profile.promo == '%s' % promo:
         return redirect(reverse('trombi:eleve', args=[profile.promo, login]))
