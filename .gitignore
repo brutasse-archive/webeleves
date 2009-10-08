@@ -3,6 +3,7 @@
 *.swp
 local_settings.py
 initial_data.json
-media/pictures/promo*
-media/pictures/custom
+webeleves/media/pictures/promo*
+webeleves/media/pictures/custom
 dap
+webeleves.egg-info
