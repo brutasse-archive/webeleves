@@ -2,7 +2,9 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 
-from website.models import Article
+from datetime import datetime
+
+from website.models import Article, Event
 
 class ArticleTest(TestCase):
     def test_article(self):
@@ -19,6 +21,17 @@ class ArticleTest(TestCase):
         # get_absolute_url()
         self.assertTrue(from_db.slug in from_db.get_absolute_url())
 
+        # private()
+        self.assertTrue(from_db.private)
+
+class EventTest(TestCase):
+    def test_event(self):
+        user = User.objects.create_user('testuser', 'bob@example.com', 'pass')
+        event = Event(title='Party', date=datetime.now(), place='Place',
+                user=user)
+
+        # __unicode__
+        self.assertEquals('%s' % event, 'Party')
 
 class WebsiteTest(TestCase):
     def test_homepage(self):

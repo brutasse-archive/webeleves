@@ -33,6 +33,7 @@ COVERAGE_MODULES = [
         'photos.views',
         'trombi.models',
         'trombi.views',
+        'trombi.forms',
         'website.models',
         'website.views',
         'shortcuts',
