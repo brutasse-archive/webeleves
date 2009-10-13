@@ -43,8 +43,26 @@ class Article(models.Model):
     def get_absolute_url(self):
         return ('article', (), {'slug': self.slug})
 
+    @property
+    def private(self):
+        return self.status == 'private'
+
 
 class ArticleForm(ModelForm):
     class Meta:
         model = Article
         exclude = ('slug', 'author', 'status',)
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=255)
+    date = models.DateField()
+    time = models.TimeField(default='00:00')
+    place = models.CharField(max_length=255)
+    user = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return u'%s' % self.title
+
+    class Meta:
+        ordering = ('date', 'time',)

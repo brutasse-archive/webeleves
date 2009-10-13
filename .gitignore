@@ -7,3 +7,5 @@ webeleves/media/pictures/promo*
 webeleves/media/pictures/custom
 dap
 webeleves.egg-info
+coverage
+test-*

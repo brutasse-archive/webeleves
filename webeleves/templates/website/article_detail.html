@@ -1,5 +1,5 @@
 {% extends 'layout/base.html' %}
-{% load markup webeleves_tags %}
+{% load markup comments thumbnail %}
 
 {% block pagetitle %}
 {{ object.title }} |
@@ -12,7 +12,61 @@
 {% block content %}
 <div class="article">
 	<h2><a href="{% url article object.slug %}">{{ object.title }}</a></h2>
-	<p class="date">Il y a {{ object.creation_date|timesince }}</p>
-	<p>{{ object.content|textile }}</p>
+	<p class="date">{{ object.creation_date|date }}, {{ object.creation_date|time:"H:i" }}
+	{% if user.is_authenticated %} - {% get_comment_count for object as comment_count %}{{ comment_count }} commentaire{{ comment_count|pluralize }}{% endif %}
+	</p>
+	{{ object.content|textile }}
 </div>
+{% if user.is_authenticated %}
+<a name="comments"></a>
+{% get_comment_list for object as comments %}
+{% if not comments %}
+<p><i>Aucun commentaire pour l'instant</i></p>
+{% else %}
+<h3>{{ comment_count }} commentaire{{ comment_count|pluralize }}</h3>
+<div id="comments">
+	{% for comment in comments %}
+	<div class="comment">
+	<div class="row">
+		{% with comment.user.get_profile as profile %}
+		<div class="column grid_1">
+			<img src="{% thumbnail profile.current_picture 48x64 %}" alt=""/>
+		</div>
+		<div class="column grid_5">
+			<div class="row">
+				<div class="column grid_5">{{ comment.comment }}</div>
+			</div>
+			<div class="row meta">
+				<div class="column grid_5 align-right">
+					<a href="{% url trombi:eleve profile.promo,user.username %}">
+						{% if profile.surname %}{{ profile.surname }}{% else %}
+						{{ comment.user.get_full_name }}{% endif %}</a> -
+					{{ comment.submit_date|date }}, {{ comment.submit_date|time:"H:i" }}
+				</div>
+			</div>
+		</div>
+		{% endwith %}
+	</div>
+	</div>
+	{% endfor %}
+</div>
+{% endif %}
+
+{% if user.can_comment %}
+<div id="commentform">
+	<h3>Ajouter un commentaire</h3>
+	{% get_comment_form for object as form %}
+	<form method="post" action="{% comment_form_target %}">
+		<p><input type="hidden" name="next" value="{% url article object.slug %}#comments" /></p>
+		<p>{{ form.comment }}</p>
+		<p>{{ form.honeypot }}</p>
+		<p>{{ form.content_type }}</p>
+		<p>{{ form.object_pk }}</p>
+		<p>{{ form.timestamp }}</p>
+		<p>{{ form.security_hash }}</p>
+		<p><input type="submit" value="Ajouter" id="id_submit" /></p>
+	</form>
+</div>
+{% endif %}
+{% endif %}
 {% endblock %}

@@ -17,6 +17,7 @@ urlpatterns = patterns('',
     (r'^trombi/', include('trombi.urls', namespace='trombi')),
     (r'^photos/', include('photos.urls', namespace='photos')),
     (r'^forum/', include('forum.urls', namespace='forum')),
+    (r'^comments/', include('django.contrib.comments.urls')),
 
     # Le site principal
     (r'^', include('website.urls')),

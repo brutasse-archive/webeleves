@@ -9,7 +9,7 @@
 
 {% block content %}
 <h2>{{ profile.user.get_full_name }}</h2>
-<div class="row">
+<div class="row profile">
 	<div class="picture column grid_3">
 		{% if profile.has_picture %}
 		<img src="{% thumbnail profile.current_picture 120x160 %}" alt=""/>
@@ -30,6 +30,14 @@
 		<div class="row">
 			<div class="column grid_2">Promo</div>
 			<div class="column grid_7">{{ profile.promo }}</div>
+		</div>
+		<div class="row">
+			<div class="column grid_2">Mail école</div>
+			<div class="column grid_7"><a href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a></div>
+		</div>
+		<div class="row">
+			<div class="column grid_2">Site école</div>
+			<div class="column grid_7"><a href="http://webeleves.emse.fr/~{{ profile.user.username }}">webeleves.emse.fr/~{{ profile.user.username }}</a></div>
 		</div>
 		{% if profile.me %}
 		<div class="row">

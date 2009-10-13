@@ -1,0 +1,10 @@
+{% load markup comments %}
+<div class="summary_{% cycle 'even' 'odd' %}">
+	<h2 class="clear{% if article.private %} private{% endif %}"><a href="{% url article article.slug %}">{{ article.title }}</a></h2>
+	<p class="date">Posté par {{ article.author.get_full_name }} le {{ article.creation_date|date }}
+	</p>
+	{{ article.content|truncatewords:20|textile }}
+	<p class="right">
+	{% if user.is_authenticated %}{% get_comment_count for article as comment_count %}{{ comment_count }} commentaire{{ comment_count|pluralize }} - {% endif %}
+	<a href="{% url article article.slug %}">Lire la suite</a></p>
+</div>

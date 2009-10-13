@@ -5,6 +5,25 @@ DATABASE_NAME = TEST_DATABASE_NAME = ':memory:'
 
 CACHE_BACKEND = 'locmem:///'
 
+INSTALLED_APPS = (
+    # Cool libs
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+    'django.contrib.markup',
+    'django.contrib.comments',
+    'sorl.thumbnail',
+    #'south',
+    # 'Real' apps
+    'website',
+    'trombi',
+    'photos',
+    'forum',
+)
+
 TEST_RUNNER='coverage_runner.test_runner_with_coverage'
 
 COVERAGE_MODULES = [

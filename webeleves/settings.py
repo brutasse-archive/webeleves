@@ -83,7 +83,9 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
     'django.contrib.markup',
+    'django.contrib.comments',
     'sorl.thumbnail',
+    'south',
     # 'Real' apps
     'website',
     'trombi',

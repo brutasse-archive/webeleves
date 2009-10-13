@@ -11,16 +11,16 @@
 	</head>
 	<body>
 		<div id="header">
-			<h1><a href="{% url home %}">Web<span class="logo">eleves</span><span class="beta">Beta</span></a></h1>
+			<h1><a href="{% url home %}">Web<span class="logo">eleves</span> <span class="beta">Beta</span></a></h1>
 			<p class="sub">Le site des élèves de l'école des Mines de Saint-Étienne</p>
-		</div>
-		<div id="connect">
-			{% if user.is_authenticated %}
-			{% if user.get_profile.surname %}{{ user.get_profile.surname }}{% else %}
-			{{ user.get_full_name }}{% endif %} <b>»</b> <a href="{% url logout %}">Logout</a>
-			{% else %}
-			Visiteur <b>»</b> <a href="{% url login %}">Login</a>
-			{% endif %}
+			<div id="connect">
+				{% if user.is_authenticated %}
+				{% if user.get_profile.surname %}{{ user.get_profile.surname }}{% else %}
+				{{ user.get_full_name }}{% endif %} |
+				<a href="{% url trombi:profile %}" class="profile">Profil</a> |
+				<a href="{% url logout %}" class="logout">Logout</a>
+				{% else %}<a href="{% url login %}" class="login">Login</a>{% endif %}
+			</div>
 		</div>
 		<div id="navbar">
 			<ul>
@@ -31,7 +31,7 @@
 				{% endif %}
 			</ul>
 		</div>
-		<div id="title"><span>
+		<div id="crumbs"><span>
 				<a href="{% url home %}">Accueil</a> {% block title %}{% endblock %}</span>
 		</div>
 		{% if messages %}
@@ -49,7 +49,7 @@
 			{% include "layout/sidebar.html" %}
 		</div>
 		<div id="footer">
-			<p>Webeleves™</p>
+			<p>Webeleves™ &mdash; <a href="http://www.emse.fr">emse.fr</a></p>
 		</div>
 	</body>
 </html>
