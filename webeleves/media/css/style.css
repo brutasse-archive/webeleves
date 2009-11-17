@@ -198,7 +198,7 @@ h2 a { color: #b02b2c; display: block; }
 }
 #events {
 	background-color: #dfe1d6;
-	border: 1px solid #ccc;
+	border: 1px solid #fff; /* FIXME */
 	-moz-border-radius: 5px;
 	padding: 0 0.5em;
 }

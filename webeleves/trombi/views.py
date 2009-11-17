@@ -131,3 +131,13 @@ def search(request):
 
     matches = UserProfile.objects.filter(qs)
     return object_list(request, matches, template_name='trombi/user_list.html')
+
+@login_required
+def contest(request):
+    """
+    Get a random user. See if the visitor can recognize him...
+    """
+    promos = UserProfile.objects.distinct().values('promo').order_by('-promo')
+    last_three = [p['promo'] for p in promos[:3]]
+    user = UserProfile.objects.filter(promo__in=last_three).order_by('?')[:1].get()
+    return render(request, 'trombi/contest.html', {'random': user})

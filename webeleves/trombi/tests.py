@@ -169,3 +169,9 @@ class TrombiTest(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertEquals(response['Content-Type'], 'text/xml')
         self.assertTrue('/search/?q={searchTerms}' in response.content)
+
+    def test_contest(self):
+        """Testing the contest page works"""
+        response = self.client.get(reverse('trombi:contest'))
+        self.assertEquals(response.status_code, 200)
+        self.assertTrue('Trombi contest' in response.content)

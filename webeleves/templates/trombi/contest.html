@@ -1,0 +1,46 @@
+{% extends 'trombi/main.html' %}
+{% load thumbnail %}
+
+{% block extrahead %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.3.2.min.js"></script>
+{% endblock %} 
+
+{% block pagetitle %}Contest | {% endblock %}
+
+{% block title %}» <a href="{% url trombi:trombi %}">Trombi</a> »
+<span class="here">Contest</span>{% endblock %}
+
+{% block content %}
+<h2>Trombi contest</h2>
+<div class="row profile">
+	<div class="picture column push_5 grid_3">
+		{% if random.has_picture %}
+		<img src="{% thumbnail random.current_picture 120x160 %}" alt=""/>
+		{% else %}
+		<img src="{{ MEDIA_URL }}pictures/anon120x160.jpg" />
+		{% endif %}
+	</div>
+</div>
+<div class="row">
+	<div class="column push_5 grid_5">
+		<span id="response_link"><a href="#">Réponse</a></span>
+		<span id="response_content" style="display:none;">{{ random.user.get_full_name }}</span>
+		| <a href="{% url trombi:contest %}">Nouvelle question</a>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function() {
+			$("#response_link").click(function () {
+				$("#response_link").hide();
+				$("#response_content").show();
+			});
+	});
+</script>
+
+{% comment %}
+<h2>École</h2>
+
+<p><a href="{% url trombi:edit_random_school %}">Modifier mon cursus école</a></p>
+{% endcomment %}
+
+{% endblock %} 
