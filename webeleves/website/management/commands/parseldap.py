@@ -12,19 +12,21 @@ from datetime import datetime
 # ldapsearch ou=ICM_3A > dap/3a.txt
 
 INTERESTING_FIELDS = (
-        'sn', # Nom
-        'givenName', # Prenom
-        'uid', # login
-        'mail', # Email
-        'ou', # Promo (ICM_?A / promo200?)
+    'sn', # Nom
+    'givenName', # Prenom
+    'uid', # login
+    'mail', # Email
+    'ou', # Promo (ICM_?A / promo200?)
+    'departmentNumber', # ICM 1A -- ICM PROMO 2006
 )
 
 FIELDS_ASSOC = {
-        'sn': 'name',
-        'givenName': 'surname',
-        'uid': 'login',
-        'mail': 'email',
-        'ou': 'promo',
+    'sn': 'name',
+    'givenName': 'surname',
+    'uid': 'login',
+    'mail': 'email',
+    'ou': 'promo',
+    'departmentNumber': 'promo',
 }
 
 class LDAPUser(object):
@@ -35,7 +37,10 @@ class LDAPUser(object):
         self.name = name.replace('_', ' ').replace('-', ' ')
         self.surname = surname
         self.email = email
-        self.promo = promo.replace('ICM_', '')
+        if promo.startswith('ICM PROMO'):
+            self.promo = promo.replace('ICM PROMO ', '')
+        else:
+            self.promo = promo.replace('ICM ', '')
 
     def __repr__(self):
         return '%s: %s %s, %s' % (self.login, self.surname, self.name, self.email)
@@ -48,7 +53,7 @@ class LDAPUser(object):
         With a bit of logic we can change it to a year"""
         if self.promo.startswith('promo'):
             return self.promo.replace('promo', '')
-        
+
         study_year = int(self.promo.replace('A', ''))
         this_year = datetime.now().year
         return this_year - study_year + 1
